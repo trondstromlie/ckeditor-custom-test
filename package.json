@@ -41,5 +41,8 @@
   },
   "scripts": {
     "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "ckeditor5-custom-element": "^9.0.1"
   }
 }
