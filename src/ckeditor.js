@@ -28,7 +28,6 @@ import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting.
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
-import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
 
 class Editor extends ClassicEditor {}
 
@@ -87,7 +86,6 @@ Editor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
-			'custom-element-tagname2',
 		]
 	},
 	language: 'nb',
@@ -109,3 +107,4 @@ Editor.defaultConfig = {
 };
 
 export default Editor;
+
