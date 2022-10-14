@@ -28,6 +28,7 @@ import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting.
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
+import CustomElement from "ckeditor5-custom-element";
 import pdf from "../icons/pdf.svg"
 
 class Editor extends ClassicEditor {}
@@ -59,6 +60,7 @@ Editor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
+	CustomElement
 ];
 
 // Editor configuration.
@@ -87,6 +89,8 @@ Editor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
+			'custom-element-tagname1',
+			'custom-element-tagname2',
 		]
 	},
 	language: 'nb',
@@ -104,7 +108,15 @@ Editor.defaultConfig = {
 			'tableRow',
 			'mergeTableCells'
 		]
-	}
+	},
+	CustomElement:{
+		items:[
+			{tag: 'tagname1', placeholder: 'some text',
+				attributes:{name:'ABCD'}, icon:pdf,
+				inline:false, editable:false},
+			{tag: 'tagname2'}
+		]
+	},
 };
 
 export default Editor;
