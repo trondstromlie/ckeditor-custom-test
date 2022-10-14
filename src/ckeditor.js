@@ -79,15 +79,16 @@ Editor.defaultConfig = {
 			'indent',
 			'|',
 			'codeBlock',
+			'imageUpload',
 			'blockQuote',
 			'insertTable',
+			'mediaEmbed',
 			'|',
 			'undo',
 			'|',
 			'redo',
 			'|',
 			'sourceEditing',
-			'custom-element-tagname1',
 			'custom-element-tagname2',
 		]
 	},
@@ -109,8 +110,9 @@ Editor.defaultConfig = {
 	},
 	CustomElement:{
 		items:[
-			{tag: 'tagname1'},
-			{tag: 'tagname2'}
+			{tag: 'tagname1', placeholder: 'some text',
+				attributes:{name:'ABCD'}, icon:pdf,
+				inline:false, editable:false}
 		]
 	},
 };
