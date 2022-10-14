@@ -29,7 +29,6 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
-import pdf from "../icons/pdf.svg"
 
 class Editor extends ClassicEditor {}
 
@@ -60,7 +59,6 @@ Editor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	CustomElementPlugin
 ];
 
 // Editor configuration.
@@ -107,14 +105,7 @@ Editor.defaultConfig = {
 			'tableRow',
 			'mergeTableCells'
 		]
-	},
-	CustomElement:{
-		items:[
-			{tag: 'tagname1', placeholder: 'some text',
-				attributes:{name:'ABCD'}, icon:pdf,
-				inline:false, editable:false}
-		]
-	},
+	}
 };
 
 export default Editor;
