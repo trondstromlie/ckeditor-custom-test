@@ -95,6 +95,7 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
+			'Timestamp'
 		]
 	},
 	language: 'nb',
