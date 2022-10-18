@@ -32,7 +32,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 class Timestamp extends Plugin {
 	init() {
-		console.log( 'Timestamp was initialized.' );
+		console.log( 'Timestamp was initialized. v2' );
 	}
 }
 
@@ -91,11 +91,9 @@ ClassicEditor.defaultConfig = {
 			'mediaEmbed',
 			'|',
 			'undo',
-			'|',
 			'redo',
 			'|',
 			'sourceEditing',
-			'|',
 			'timestamp'
 		]
 	},
