@@ -31,6 +31,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
+
 class Timestamp extends Plugin {
 	init() {
 		console.log( 'Timestamp was initialized. v2' );
