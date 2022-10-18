@@ -29,10 +29,22 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
 class Timestamp extends Plugin {
 	init() {
 		console.log( 'Timestamp was initialized. v2' );
+		const editor = this.editor;
+
+		editor.ui.componentFactory.add( 'timestamp', () => {
+			const button = new ButtonView();
+			button.set( {
+				label: 'Timestamp',
+				withText: true
+			});
+
+			return button;
+		})
 	}
 }
 
