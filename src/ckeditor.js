@@ -66,7 +66,6 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	CustomElementPlugin,
 	Timestamp
 ];
 
@@ -96,7 +95,6 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
-			'custom-element-tagname2'
 		]
 	},
 	language: 'nb',
