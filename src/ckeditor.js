@@ -45,7 +45,11 @@ class Timestamp extends Plugin {
 			});
 
 			button.on('execute', () => {
-				console.log("button clicked")
+				const now = new Date();
+				editor.model.change( writer => {
+
+					editor.model.insertContent( writer.createText( now.toString() ))
+				})
 			})
 
 			return button;
