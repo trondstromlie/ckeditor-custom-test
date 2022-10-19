@@ -44,6 +44,10 @@ class Timestamp extends Plugin {
 				withText: true
 			});
 
+			button.on('execute', () => {
+				console.log("button clicked")
+			})
+
 			return button;
 		})
 	}
