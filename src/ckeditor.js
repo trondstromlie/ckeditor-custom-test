@@ -47,9 +47,9 @@ class Timestamp extends Plugin {
 			button.on('execute', () => {
 				const now = new Date();
 				editor.model.change( writer => {
-					const htmlDP = editorInstance.data.processor;
+					const htmlDP = editor.data.processor;
 					const viewFragment = htmlDP.toView("<video><b>Test</b> Content</video>");
-					const modelFragment = editorInstance.data.toModel( viewFragment );
+					const modelFragment = editor.data.toModel( viewFragment );
 
 					editor.model.insertContent(modelFragment);
 				})
