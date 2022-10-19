@@ -30,6 +30,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
 
 
 class Timestamp extends Plugin {
@@ -90,7 +91,8 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Timestamp
+	Timestamp,
+	CustomElementPlugin
 ];
 
 // Editor configuration.
@@ -118,7 +120,8 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
-			'timestamp'
+			'timestamp',
+			'custom-element-tagname1'
 		]
 	},
 	language: 'nb',
@@ -136,5 +139,12 @@ ClassicEditor.defaultConfig = {
 			'tableRow',
 			'mergeTableCells'
 		]
-	}
+	},
+	CustomElement:{
+		items:[
+			{tag: 'tagname1', placeholder: 'some text',
+				attributes:{name:'ABCD'},
+				inline:false, editable:false}
+		]
+	},
 };
