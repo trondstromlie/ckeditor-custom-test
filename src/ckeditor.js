@@ -31,6 +31,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
+import pdf from '../icons/pdf.svg'
 
 
 class Timestamp extends Plugin {
@@ -42,7 +43,8 @@ class Timestamp extends Plugin {
 			const button = new ButtonView();
 			button.set( {
 				label: 'Timestamp',
-				withText: true
+				withText: true,
+				icon: pdfs
 			});
 
 			button.on('execute', () => {
