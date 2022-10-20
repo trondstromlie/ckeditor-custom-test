@@ -29,6 +29,7 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import pdf from '../icons/pdf.svg'
 
@@ -50,7 +51,7 @@ class Timestamp extends Plugin {
 				const now = new Date();
 				editor.model.change( writer => {
 					const htmlDP = editor.data.processor;
-					const viewFragment = htmlDP.toView("<video><b>Test</b> Content</video>");
+					const viewFragment = htmlDP.toView("<test><b>Test</b> Content</test>");
 					const modelFragment = editor.data.toModel( viewFragment );
 
 					editor.model.insertContent(modelFragment);
@@ -92,7 +93,8 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Timestamp
+	Timestamp,
+	GeneralHtmlSupport
 ];
 
 // Editor configuration.
@@ -137,6 +139,13 @@ ClassicEditor.defaultConfig = {
 			'tableColumn',
 			'tableRow',
 			'mergeTableCells'
+		]
+	},
+	htmlSupport: {
+		allow: [
+			{
+				name: 'test'
+			}
 		]
 	}
 };
