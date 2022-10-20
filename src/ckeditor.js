@@ -51,7 +51,7 @@ class Timestamp extends Plugin {
 				const now = new Date();
 				editor.model.change( writer => {
 					const htmlDP = editor.data.processor;
-					const viewFragment = htmlDP.toView("<test><b>Test</b> Content</test>");
+					const viewFragment = htmlDP.toView("<div><b>Test</b> Content</div>");
 					const modelFragment = editor.data.toModel( viewFragment );
 
 					editor.model.insertContent(modelFragment);
@@ -144,7 +144,7 @@ ClassicEditor.defaultConfig = {
 	htmlSupport: {
 		allow: [
 			{
-				name: 'test'
+				name: 'div'
 			}
 		]
 	}
