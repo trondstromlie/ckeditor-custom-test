@@ -85,7 +85,7 @@ ClassicEditor.builtinPlugins = [
 	Italic,
 	Link,
 	List,
-	Markdown,
+	// Markdown,
 	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
@@ -144,7 +144,10 @@ ClassicEditor.defaultConfig = {
 	htmlSupport: {
 		allow: [
 			{
-				name: 'div'
+				name: /.*/,
+				attributes: true,
+				classes: true,
+				styles: true
 			}
 		]
 	}
