@@ -36,13 +36,13 @@ import pdf from '../icons/pdf.svg'
 
 class Timestamp extends Plugin {
 	init() {
-		console.log( 'Timestamp was initialized. v2' );
+		console.log( 'AddPdf was initialized. v2' );
 		const editor = this.editor;
 
-		editor.ui.componentFactory.add( 'timestamp', () => {
+		editor.ui.componentFactory.add( 'addpdf', () => {
 			const button = new ButtonView();
 			button.set( {
-				label: 'Timestamp',
+				label: 'Add PDF',
 				withText: true,
 				icon: pdf
 			});
@@ -122,7 +122,7 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
-			'timestamp'
+			'addpdf'
 		]
 	},
 	language: 'nb',
