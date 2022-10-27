@@ -51,10 +51,11 @@ class Timestamp extends Plugin {
 				const now = new Date();
 				editor.model.change( writer => {
 					const htmlDP = editor.data.processor;
-					const viewFragment = htmlDP.toView("<pdf><b>Test</b> Content</pdf>");
+					const viewFragment = htmlDP.toView("<div><b>Test</b> Content</div>");
 					const modelFragment = editor.data.toModel( viewFragment );
 
-					editor.model.insertContent(modelFragment);
+
+					editor.model.insertContent(modelFragment.data.processor.keepHtml('div'));
 				})
 			})
 
