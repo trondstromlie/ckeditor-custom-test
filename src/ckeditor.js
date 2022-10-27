@@ -85,7 +85,7 @@ ClassicEditor.builtinPlugins = [
 	Italic,
 	Link,
 	List,
-	// Markdown,
+	Markdown,
 	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
