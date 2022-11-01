@@ -29,16 +29,61 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import Model from "@ckeditor/ckeditor5-ui/src/model";
+import {
+	addListToDropdown,
+	createDropdown
+} from "@ckeditor/ckeditor5-ui/src/dropdown/utils";
+import Collection from "@ckeditor/ckeditor5-utils/src/collection";
+import SplitButtonView from "@ckeditor/ckeditor5-ui/src/dropdown/button/splitbuttonview";
 import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import pdf from '../icons/pdf.svg'
 
 
-class Timestamp extends Plugin {
+class AddPdfUrl extends  Plugin {
+	init() {
+		console.log('init addPdfUrl')
+		const editor = this.editor;
+		editor.ui.componentFactory.add("InsertDropDown", locale => {
+			const dropdownView = createDropdown(locale, SplitButtonView);
+			dropdownView.buttonView.actionView.set({
+				withText: true,
+				label: "choose variable",
+				icon: pdf,
+				tooltip: true
+			});
+
+			const items = new Collection();
+
+			items.add({
+				type: "button",
+				model: new Model({
+					withText: true,
+					label: "Foo"
+				})
+			});
+
+			items.add({
+				type: "button",
+				model: new Model({
+					withText: true,
+					label: "Bar"
+				})
+			});
+			addListToDropdown(dropdownView, items);
+
+			return dropdownView;
+		});
+	}
+}
+
+class AddPdf extends Plugin {
 	init() {
 		console.log( 'AddPdf was initialized. v2' );
 		const editor = this.editor;
-
+		editor.data.processor.keepHtml('div')
+		editor.data.processor.keepHtml('pdf')
 		editor.ui.componentFactory.add( 'addpdf', () => {
 			const button = new ButtonView();
 			button.set( {
@@ -48,14 +93,12 @@ class Timestamp extends Plugin {
 			});
 
 			button.on('execute', () => {
-				const now = new Date();
 				editor.model.change( writer => {
 					const htmlDP = editor.data.processor;
-					const viewFragment = htmlDP.toView("<div><b>Test</b> Content</div>");
+					const viewFragment = htmlDP.toView("<div class='pdf'><strong>Test</strong> Content</div> <br> <pdf>hello</pdf>");
 					const modelFragment = editor.data.toModel( viewFragment );
 
-
-					editor.model.insertContent(modelFragment.data.processor.keepHtml('div'));
+					editor.model.insertContent(modelFragment);
 				})
 			})
 
@@ -94,8 +137,9 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Timestamp,
-	GeneralHtmlSupport
+	AddPdf,
+	GeneralHtmlSupport,
+	AddPdfUrl
 ];
 
 // Editor configuration.
@@ -123,7 +167,8 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'sourceEditing',
-			'addpdf'
+			'addpdf',
+			'InsertDropDown'
 		]
 	},
 	language: 'nb',
