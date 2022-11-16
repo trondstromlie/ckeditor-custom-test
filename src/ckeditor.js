@@ -28,82 +28,17 @@ import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting.
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Model from "@ckeditor/ckeditor5-ui/src/model";
-import {
-	addListToDropdown,
-	createDropdown
-} from "@ckeditor/ckeditor5-ui/src/dropdown/utils";
-import Collection from "@ckeditor/ckeditor5-utils/src/collection";
-import SplitButtonView from "@ckeditor/ckeditor5-ui/src/dropdown/button/splitbuttonview";
 import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import pdf from '../icons/pdf.svg'
+import {Plugin} from "@ckeditor/ckeditor5-core";
 
-
-class AddPdfUrl extends  Plugin {
-	init() {
-		console.log('init addPdfUrl')
-		const editor = this.editor;
-		editor.ui.componentFactory.add("InsertDropDown", locale => {
-			const dropdownView = createDropdown(locale, SplitButtonView);
-			dropdownView.buttonView.actionView.set({
-				withText: true,
-				label: "choose variable",
-				icon: pdf,
-				tooltip: true
-			});
-
-			const items = new Collection();
-
-			items.add({
-				type: "button",
-				model: new Model({
-					withText: true,
-					label: "Foo"
-				})
-			});
-
-			items.add({
-				type: "button",
-				model: new Model({
-					withText: true,
-					label: "Bar"
-				})
-			});
-			addListToDropdown(dropdownView, items);
-
-			return dropdownView;
-		});
-	}
-}
-
-class AddPdf extends Plugin {
+class allowHTML extends Plugin {
 	init() {
 		console.log( 'AddPdf was initialized. v2' );
 		const editor = this.editor;
-		editor.data.processor.keepHtml('div')
-		editor.data.processor.keepHtml('pdf')
-		editor.ui.componentFactory.add( 'addpdf', () => {
-			const button = new ButtonView();
-			button.set( {
-				label: 'Add PDF',
-				withText: true,
-				icon: pdf
-			});
-
-			button.on('execute', () => {
-				editor.model.change( writer => {
-					const htmlDP = editor.data.processor;
-					const viewFragment = htmlDP.toView("<div class='pdf'><strong>Test</strong> Content</div> <br> <pdf>hello</pdf>");
-					const modelFragment = editor.data.toModel( viewFragment );
-
-					editor.model.insertContent(modelFragment);
-				})
-			})
-
-			return button;
-		})
+			editor.data.processor.keepHtml('div')
+			editor.data.processor.keepHtml('figure')
+			editor.data.processor.keepHtml('oembed')
+			editor.data.processor.keepHtml('iframe')
 	}
 }
 
@@ -137,9 +72,8 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	AddPdf,
-	GeneralHtmlSupport,
-	AddPdfUrl
+	allowHTML,
+	GeneralHtmlSupport
 ];
 
 // Editor configuration.
@@ -166,9 +100,7 @@ ClassicEditor.defaultConfig = {
 			'undo',
 			'redo',
 			'|',
-			'sourceEditing',
-			'addpdf',
-			'InsertDropDown'
+			'sourceEditing'
 		]
 	},
 	language: 'nb',
@@ -194,6 +126,37 @@ ClassicEditor.defaultConfig = {
 				attributes: true,
 				classes: true,
 				styles: true
+			},
+			{
+				name: 'iframe',
+				attributes: true,
+				classes: true,
+				styles: true
+			}
+		]
+	},
+	mediaEmbed: {
+		previewsInData: true,
+		providers: [
+			{
+				// hint: this is just for previews. Get actual HTML codes by making API calls from your CMS
+				name: 'youtube',
+
+				// Match all URLs or just the ones you need:
+				url: /.+/,
+
+				html: match => {
+					const url = match[ 0 ];
+					var iframeUrl = url.replace('watch?v=', 'embed/')
+					console.log(iframeUrl)
+
+					return (
+						// If you need, set maxwidth and other styles for 'iframely-embed' class - it's yours to customize
+						`<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;">
+            			<iframe src="${iframeUrl}" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">test</iframe>
+        				</div>`
+					);
+				}
 			}
 		]
 	}
